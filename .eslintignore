@@ -1,0 +1,9 @@
+/flow-typed
+/coverage
+/build/**
+/e2e/**
+/public/assets/bundle.js
+!.package.json
+!.package-lock.json
+!.eslintrc.js
+webpack.config.js
