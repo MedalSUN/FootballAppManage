@@ -3,11 +3,11 @@ import { Text } from 'react-native'
 import { Container, Content } from 'native-base'
 import { Query } from 'react-apollo'
 
-export default class TestPage extends React.Component {
+export default class ApprovalPage extends React.Component {
   static navigationOptions = (
     (props) => {
       return {
-        headerTitle: 'TestPage',
+        headerTitle: 'ApprovalPage',
         headerTitleStyle: {
           marginLeft: 110
         }
@@ -18,7 +18,7 @@ export default class TestPage extends React.Component {
     return (
       <Container>
         <Content>
-          <Text>你好世界</Text>
+          <Text>这里是审批页面</Text>
         </Content>
       </Container>
     )

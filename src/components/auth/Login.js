@@ -14,9 +14,9 @@ class Login extends React.Component {
   static navigationOptions = (
     (props) => {
       return {
-        headerTitle: '登录',
+        headerTitle: '管理员登录',
         headerTitleStyle: {
-          marginLeft: 190
+          marginLeft: 160
         }
       }
     }
@@ -92,7 +92,7 @@ class Login extends React.Component {
 
           <Image style={Styles.topImage} source={require('../../../img/logo.png')} resizeMode="contain"/>
           <Form style={Styles.loginForm}>
-            <Item error={emailError} >
+            <Item error={emailError}>
               <Input
                 fontSize='1'
                 placeholder="请输入邮箱"
@@ -120,14 +120,6 @@ class Login extends React.Component {
           <View style={Styles.loginButtonView}>
             <Button onPress={this.handleSubmit} block style={Styles.loginButton} >
               <Text style={Styles.loginButtonText} allowFontScaling>登录</Text>
-            </Button>
-          </View>
-          <View style={Styles.signupView} >
-            <Button block transparent style={Styles.noAccountButton} disabled>
-              <Text style={Styles.greyText} allowFontScaling>没有账号？</Text>
-            </Button>
-            <Button transparent onPress={() => navigation.navigate('Register')} style={Styles.goSignupButton} >
-              <Text style={Styles.whiteText } allowFontScaling>去注册</Text>
             </Button>
           </View>
         </Content>
