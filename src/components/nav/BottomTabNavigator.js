@@ -9,8 +9,9 @@ import AddRaceSchedule from '../raceSchedule/AddRaceSchedule'
 // 引入赛事详情相关页面
 import AddRaceDetails from '../raceDetails/AddRaceDetails'
 
-// 创建BottomTabNavigator的几个stack
-// 1: 创建赛事安排模块
+// 引入审批模块相关页面
+import Approval from '../check/Approval'
+
 const RaceScheduleStack = createStackNavigator({
   AddRaceSchedule: { screen: AddRaceSchedule }
 })
@@ -19,10 +20,15 @@ const RaceDetailsStack = createStackNavigator({
   AddRaceDetails: { screen: AddRaceDetails }
 })
 
+const CheckStack = createStackNavigator({
+  Approval: { screen: Approval }
+})
+
 const BottomTabNavigator = createBottomTabNavigator(
   {
     赛程: { screen: RaceScheduleStack },
-    详情: { screen: RaceDetailsStack }
+    详情: { screen: RaceDetailsStack },
+    审批: { screen: CheckStack }
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -34,9 +40,11 @@ const BottomTabNavigator = createBottomTabNavigator(
         const { routeName } = navigation.state
         let iconName
         if (routeName === '赛程') {
-          iconName = `ios-baseball${focused ? '' : ''}`
+          iconName = `ios-alarm${focused ? '' : ''}`
         } else if (routeName === '详情') {
           iconName = `ios-list${focused ? '' : ''}`
+        } else if (routeName === '详情') {
+          iconName = `ios-home${focused ? '' : ''}`
         }
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
