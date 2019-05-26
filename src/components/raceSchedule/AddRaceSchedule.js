@@ -39,6 +39,7 @@ export default class AddRaceSchedule extends React.Component {
     console.log('点击确定')
   }
   render () {
+    const { navigation } = this.props
     return (
       <Container>
         <Content style={Styles.contentStyle}>
@@ -81,7 +82,7 @@ export default class AddRaceSchedule extends React.Component {
             </Item>
 
             <View style={[Styles.rowStyle1, Styles.teamSelectBox]}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('selectPage', { selectContent: 'teamA' })}>
                 <View style={[Styles.buttonBox, Styles.rowStyle]}>
                   <Text style={Styles.teamSelectButton}>点击选择主队</Text>
                 </View>
@@ -91,7 +92,7 @@ export default class AddRaceSchedule extends React.Component {
               </View>
             </View>
             <View style={[Styles.rowStyle1, Styles.teamSelectBox]}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('selectPage', { selectContent: 'teamB' })}>
                 <View style={[Styles.buttonBox, Styles.rowStyle]}>
                   <Text style={Styles.teamSelectButton}>点击选择客队</Text>
                 </View>
@@ -101,7 +102,7 @@ export default class AddRaceSchedule extends React.Component {
               </View>
             </View>
             <View style={[Styles.rowStyle1, Styles.teamSelectBox]}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('selectPage', { selectContent: 'matchLocation' })}>
                 <View style={[Styles.buttonBox, Styles.rowStyle]}>
                   <Text style={Styles.teamSelectButton}>点击选择球场</Text>
                 </View>
