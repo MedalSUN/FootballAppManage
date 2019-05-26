@@ -5,6 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 // 引入赛程模块相关页面
 import AddRaceSchedule from '../raceSchedule/AddRaceSchedule'
+import selectPage from '../raceSchedule/components/selectPage'
 
 // 引入赛事详情相关页面
 import AddRaceDetails from '../raceDetails/AddRaceDetails'
@@ -13,7 +14,8 @@ import AddRaceDetails from '../raceDetails/AddRaceDetails'
 import Approval from '../check/Approval'
 
 const RaceScheduleStack = createStackNavigator({
-  AddRaceSchedule: { screen: AddRaceSchedule }
+  AddRaceSchedule: { screen: AddRaceSchedule },
+  selectPage: { screen: selectPage }
 })
 
 const RaceDetailsStack = createStackNavigator({
