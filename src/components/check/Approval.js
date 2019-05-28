@@ -7,9 +7,9 @@ export default class ApprovalPage extends React.Component {
   static navigationOptions = (
     (props) => {
       return {
-        headerTitle: 'ApprovalPage',
+        headerTitle: '审批管理',
         headerTitleStyle: {
-          marginLeft: 110
+          marginLeft: 165
         }
       }
     }
@@ -18,7 +18,7 @@ export default class ApprovalPage extends React.Component {
     return (
       <Container>
         <Content>
-          <Text>这里是审批页面</Text>
+          <Text>审批管理</Text>
         </Content>
       </Container>
     )
