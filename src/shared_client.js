@@ -2,7 +2,7 @@ import { getToken } from './util'
 import ApolloClient from 'apollo-boost'
 
 export const client = new ApolloClient({
-  uri: 'http://172.20.0.139:5000/graphql',
+  uri: 'http://172.20.1.95:5000/graphql',
   request: async (operation) => {
     const token = await getToken()
     let config = {}
