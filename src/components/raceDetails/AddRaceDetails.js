@@ -1,15 +1,17 @@
 import React from 'react'
 import { Text } from 'react-native'
-import { Container, Content } from 'native-base'
+import { Container, Content, Tabs, Tab } from 'native-base'
 import { Query } from 'react-apollo'
+import Score from './components/Score'
+import GoalDetails from './components/GoalDetails'
 
 export default class AddRaceDetails extends React.Component {
   static navigationOptions = (
     (props) => {
       return {
-        headerTitle: 'AddRaceDetails',
+        headerTitle: '比赛详情管理',
         headerTitleStyle: {
-          marginLeft: 110
+          marginLeft: 150
         }
       }
     }
@@ -18,7 +20,14 @@ export default class AddRaceDetails extends React.Component {
     return (
       <Container>
         <Content>
-          <Text>你好这里是赛事详情页面</Text>
+          <Tabs>
+            <Tab heading="比分管理">
+              <Score/>
+            </Tab>
+            <Tab heading="进球管理">
+              <GoalDetails/>
+            </Tab>
+          </Tabs>
         </Content>
       </Container>
     )

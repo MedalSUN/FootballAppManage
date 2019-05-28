@@ -10,9 +10,9 @@ export default class AddRaceSchedule extends React.Component {
   static navigationOptions = (
     (props) => {
       return {
-        headerTitle: 'AddRaceSchedule',
+        headerTitle: '赛程管理',
         headerTitleStyle: {
-          marginLeft: 110
+          marginLeft: 170
         }
       }
     }
