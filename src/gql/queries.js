@@ -29,3 +29,36 @@ query allFootballCourts{
     }
   }
 `
+
+// 获取所有比赛赛程
+export const ALL_MATCH = gql`
+query allMatchSchedules($orderBy: [MatchSchedulesOrderBy!]){
+  allMatchSchedules(orderBy: $orderBy){
+    totalCount
+    nodes{
+      id,
+      orderNumber,
+      wheelNumber,
+      matchDate,
+      teamA,
+      footballTeamByTeamA{
+        teamName,
+        imageByTeamLogo{
+          url
+        }
+      },
+      teamB,
+      footballTeamByTeamB{
+        teamName,
+        imageByTeamLogo{
+          url
+        }
+      },
+      matchGoalById{
+        goalA,
+        goalB
+      }
+    }
+  }
+}
+`
