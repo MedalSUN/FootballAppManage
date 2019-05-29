@@ -129,7 +129,6 @@ export default class AddRaceSchedule extends React.Component {
                   fontSize='1'
                   placeholder="比赛场序"
                   onChangeText={value => this.handleInputChange('orderNumber', value)}
-                  keyboardType="email-address"
                   autoCapitalize="none"
                   autoCorrect={false}
                   allowFontScaling
@@ -141,7 +140,6 @@ export default class AddRaceSchedule extends React.Component {
                   fontSize='1'
                   placeholder="比赛轮数"
                   onChangeText={value => this.handleInputChange('wheelNumber', value)}
-                  keyboardType="email-address"
                   autoCapitalize="none"
                   autoCorrect={false}
                   allowFontScaling
@@ -153,7 +151,6 @@ export default class AddRaceSchedule extends React.Component {
                   fontSize='1'
                   placeholder="比赛时间(2018-05-05)"
                   onChangeText={value => this.handleInputChange('matchDate', value)}
-                  keyboardType="email-address"
                   autoCapitalize="none"
                   autoCorrect={false}
                   allowFontScaling
