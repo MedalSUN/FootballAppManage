@@ -2,6 +2,7 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
+  // =========== ScoreForm的样式
   contentStyle: {
     backgroundColor: '#F2F2F2',
     height: 600
