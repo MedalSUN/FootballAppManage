@@ -8,3 +8,12 @@ mutation changeMatchSchedule($input: ChangeMatchScheduleInput!){
     }
   }
 `
+
+// 用于增加指定比赛的比分
+export const ADD_MATCH_GOALS = gql`
+mutation changeMatchGoal($input: ChangeMatchGoalInput!){
+  changeMatchGoal(input: $input){
+  string
+  }
+}
+`

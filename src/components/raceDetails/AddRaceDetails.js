@@ -17,12 +17,13 @@ export default class AddRaceDetails extends React.Component {
     }
   )
   render () {
+    const { navigation } = this.props
     return (
       <Container>
         <Content>
           <Tabs>
             <Tab heading="比分管理">
-              <Score/>
+              <Score navigation={navigation}/>
             </Tab>
             <Tab heading="进球管理">
               <GoalDetails/>
