@@ -9,7 +9,9 @@ import selectPage from '../raceSchedule/components/selectPage'
 
 // 引入赛事详情相关页面
 import AddRaceDetails from '../raceDetails/AddRaceDetails'
-import ScoreForm from '../raceDetails/ScoreForm'
+// import ScoreForm from '../raceDetails/ScoreForm'
+import matchDetailsSelectPage from '../raceDetails/matchDetailsSelectPage'
+import GoalDetailsForm from '../raceDetails/GoalDetailsForm'
 
 // 引入审批模块相关页面
 import Approval from '../check/Approval'
@@ -21,7 +23,9 @@ const RaceScheduleStack = createStackNavigator({
 
 const RaceDetailsStack = createStackNavigator({
   AddRaceDetails: { screen: AddRaceDetails },
-  ScoreForm: { screen: ScoreForm }
+  matchDetailsSelectPage: { screen: matchDetailsSelectPage },
+  GoalDetailsForm: { screen: GoalDetailsForm }
+  // ScoreForm: { screen: ScoreForm }
 })
 
 const CheckStack = createStackNavigator({
