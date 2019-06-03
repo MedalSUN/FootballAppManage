@@ -56,7 +56,68 @@ query allMatchSchedules($orderBy: [MatchSchedulesOrderBy!]){
       },
       matchGoalById{
         goalA,
-        goalB
+        goalB,
+        finished
+      }
+    }
+  }
+}
+`
+// 获取相应比赛的比分
+export const MATCH_GOAL = gql`
+query allMatchGoals($condition: MatchGoalCondition) {
+  allMatchGoals(condition: $condition){
+    totalCount
+    nodes{
+      id,
+      goalA,
+      goalB
+    }
+  }
+}
+`
+
+// 获取球队的球员
+export const ALL_TEAM_PLAYER = gql`
+query allPersonTeams($condition: PersonTeamCondition){
+  allPersonTeams(condition: $condition){
+    totalCount
+    nodes{
+      checked,
+      teamId,
+      personByPersonId{
+        id,
+        playerName,
+        shirtNum,
+        imageByPlayerImg{
+          url
+        }
+      }
+    }
+  }
+}
+`
+// 查找审批还没有通过的用户
+export const ALL_PERSON_TEAMS = gql`
+query allPersonTeams($condition: PersonTeamCondition){
+  allPersonTeams(condition: $condition){
+    totalCount
+    nodes{
+      checked,
+      teamId,
+      personByPersonId{
+        id
+        playerName,
+        shirtNum,
+        imageByPlayerImg{
+          url
+        }
+      }
+      footballTeamByTeamId{
+        teamName
+        imageByTeamLogo{
+          url
+        }
       }
     }
   }
