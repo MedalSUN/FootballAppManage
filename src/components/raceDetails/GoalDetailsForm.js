@@ -123,6 +123,7 @@ export default class GoalDetailsForm extends React.Component {
     const matchId = navigation.getParam('matchId', '')
     const teamAId = navigation.getParam('teamAId', '')
     const teamBId = navigation.getParam('teamBId', '')
+    const backFlagTestChanges = navigation.getParam('backFlagTestChanges', '')
     console.log(teamAId)
     console.log(teamBId)
     client.mutate({
@@ -137,6 +138,7 @@ export default class GoalDetailsForm extends React.Component {
     }).then((reponse) => {
       console.log(reponse)
       // this.showToast(reponse.data.changeMatchGoalDetails.string)
+      backFlagTestChanges(true)
       navigation.goBack()
     })
   }
