@@ -84,5 +84,51 @@ export default StyleSheet.create({
     fontSize: 13,
     fontFamily: 'Helvetica Neue',
     color: '#808080'
+  },
+  // matchDetailsSelectPage 页面
+  teamLogoSize: {
+    width: 30,
+    height: 30,
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 15,
+    marginRight: 20
+  },
+  teamBox: {
+    marginTop: 20
+  },
+  selectPlayerTextBox: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20
+  },
+  selectText: {
+    fontSize: 30,
+    fontFamily: 'Helvetica Neue',
+    color: '#FFCC00'
+  },
+  playerNameText: {
+    fontSize: 18,
+    fontFamily: 'Helvetica Neue',
+    color: '#FF9900'
+  },
+  allPlayerContainer: {
+    paddingTop: 30
+  },
+  playerHeaderImg: {
+    width: 30,
+    height: 30,
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 15,
+    marginRight: 20
+  },
+  playerBox: {
+    marginLeft: 150,
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   }
 })
