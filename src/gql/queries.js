@@ -42,6 +42,7 @@ query allMatchSchedules($orderBy: [MatchSchedulesOrderBy!]){
       matchDate,
       teamA,
       footballTeamByTeamA{
+        id,
         teamName,
         imageByTeamLogo{
           url
@@ -49,6 +50,7 @@ query allMatchSchedules($orderBy: [MatchSchedulesOrderBy!]){
       },
       teamB,
       footballTeamByTeamB{
+        id,
         teamName,
         imageByTeamLogo{
           url
