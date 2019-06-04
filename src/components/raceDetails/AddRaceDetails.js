@@ -1,9 +1,11 @@
 import React from 'react'
-import { Text } from 'react-native'
-import { Container, Content } from 'native-base'
+import { Text, RefreshControl, ScrollView } from 'react-native'
+import { Container, Content, Root } from 'native-base'
 import { Query } from 'react-apollo'
 import Score from './components/Score'
 import GoalDetails from './components/GoalDetails'
+
+// 为添加下拉刷新，本页面暂时作废，将比赛详情主页面放置于GoalDetails页面中
 
 export default class AddRaceDetails extends React.Component {
   static navigationOptions = (
