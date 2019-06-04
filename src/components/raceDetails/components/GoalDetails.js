@@ -22,6 +22,7 @@ export default class GoalDetails extends React.Component {
     super(props)
     this.state = {
       refreshing: false,
+      backFlagTest: false,
       isRefetch: false
     }
   }
@@ -38,122 +39,136 @@ export default class GoalDetails extends React.Component {
     this.setState({ refreshing: false, isRefetch: false })
   }
 
-  render () {
-    const { navigation } = this.props
-    return <Query query={ALL_MATCH} fetchPolicy='cache-and-network' variables={{ orderBy: 'ORDER_NUMBER_ASC' }}>
-      {({ data, error, loading, refetch }) => {
-        if (loading) return <Text>Loading...</Text>
-        if (error) return <Text>`Error! ${error.message}`</Text>
-        return (
-          <Root>
-            <ScrollView
-              refreshControl={
-                <RefreshControl
-                  refreshing={this.state.refreshing}
-                  onRefresh={this.testRefresh}
-                  title={'正在加载中'}
-                />
-              }
-            >
-              <Container>
-                <Content>
-                  <View style={[Styles.contentStyle, Styles.contentBox]}>
-                    {
-                      data.allMatchSchedules.nodes.map((p, i) => {
-                        return <View key={i}>
-                          {
-                            this.state.isRefetch === true && refetch() && this.finishedRefresh()
-                          }
-                          {/* 当没有任何进球数据时 */}
-                          {
-                            !p.matchGoalById && <TouchableOpacity style={Styles.matchBox} onPress={() => navigation.navigate('GoalDetailsForm', {
-                              teamAId: p.footballTeamByTeamA.id,
-                              teamBId: p.footballTeamByTeamB.id,
-                              teamAName: p.footballTeamByTeamA.teamName,
-                              teamBName: p.footballTeamByTeamB.teamName,
-                              matchId: p.id,
-                              teamALogo: p.footballTeamByTeamA.imageByTeamLogo.url,
-                              teamBLogo: p.footballTeamByTeamB.imageByTeamLogo.url
-                            })}>
-                              {/* 日期场序轮数 */}
-                              <View style={[Styles.matchBoxTop]}>
-                                <View style={Styles.rowFlex}>
-                                  <Text>日期：</Text>
-                                  <Text style={Styles.topFont}>{p.matchDate}</Text>
-                                </View>
-                                <View style={Styles.rowFlex}>
-                                  <Text>轮数：</Text>
-                                  <Text style={Styles.topFont}>{p.wheelNumber}</Text>
-                                </View>
-                                <View style={Styles.rowFlex}>
-                                  <Text>场序:</Text>
-                                  <Text style={Styles.topFont}>{p.orderNumber}</Text>
-                                </View>
-                              </View>
-                              {/* 主客队 */}
-                              <View style={Styles.matchBoxBottom}>
-                                <View style={Styles.rowFlex}>
-                                  <Image style={Styles.imgSize} source={{ uri: p.footballTeamByTeamA.imageByTeamLogo.url }}/>
-                                  <Text style={Styles.teamName}>{p.footballTeamByTeamA.teamName}</Text>
-                                </View>
-                                <Text>VS</Text>
-                                <View style={Styles.rowFlex}>
-                                  <Text style={Styles.teamName}>{p.footballTeamByTeamB.teamName}</Text>
-                                  <Image style={Styles.imgSize} source={{ uri: p.footballTeamByTeamB.imageByTeamLogo.url }}/>
-                                </View>
-                              </View>
-                            </TouchableOpacity>
-                          }
-                          {/* 存在进球数据，但是没有完成比赛数据录入的 */}
-                          {
-                            p.matchGoalById && p.matchGoalById.finished === false && <TouchableOpacity style={Styles.matchBox} onPress={() => navigation.navigate('GoalDetailsForm', {
-                              teamAId: p.footballTeamByTeamA.id,
-                              teamBId: p.footballTeamByTeamB.id,
-                              teamAName: p.footballTeamByTeamA.teamName,
-                              teamBName: p.footballTeamByTeamB.teamName,
-                              matchId: p.id,
-                              teamALogo: p.footballTeamByTeamA.imageByTeamLogo.url,
-                              teamBLogo: p.footballTeamByTeamB.imageByTeamLogo.url
-                            })}>
-                              {/* 日期场序轮数 */}
-                              <View style={[Styles.matchBoxTop]}>
-                                <View style={Styles.rowFlex}>
-                                  <Text>日期：</Text>
-                                  <Text style={Styles.topFont}>{p.matchDate}</Text>
-                                </View>
-                                <View style={Styles.rowFlex}>
-                                  <Text>轮数：</Text>
-                                  <Text style={Styles.topFont}>{p.wheelNumber}</Text>
-                                </View>
-                                <View style={Styles.rowFlex}>
-                                  <Text>场序:</Text>
-                                  <Text style={Styles.topFont}>{p.orderNumber}</Text>
-                                </View>
-                              </View>
-                              {/* 主客队 */}
-                              <View style={Styles.matchBoxBottom}>
-                                <View style={Styles.rowFlex}>
-                                  <Image style={Styles.imgSize} source={{ uri: p.footballTeamByTeamA.imageByTeamLogo.url }}/>
-                                  <Text style={Styles.teamName}>{p.footballTeamByTeamA.teamName}</Text>
-                                </View>
-                                <Text>VS</Text>
-                                <View style={Styles.rowFlex}>
-                                  <Text style={Styles.teamName}>{p.footballTeamByTeamB.teamName}</Text>
-                                  <Image style={Styles.imgSize} source={{ uri: p.footballTeamByTeamB.imageByTeamLogo.url }}/>
-                                </View>
-                              </View>
-                            </TouchableOpacity>
-                          }
-                        </View>
-                      })
-                    }
-                  </View>
-                </Content>
-              </Container>
-            </ScrollView>
-          </Root>
-        )
-      }}
-    </Query>
-  }
+     // 作为父组件的函数传递给子组件
+     backFlagTestChanges = (value) => {
+       if (value) {
+         this.setState({
+           backFlagTest: true
+         })
+       }
+     }
+
+     render () {
+       const { navigation } = this.props
+       return <Query query={ALL_MATCH} fetchPolicy='cache-and-network' variables={{ orderBy: 'ORDER_NUMBER_ASC' }}>
+         {({ data, error, loading, refetch }) => {
+           if (loading) return <Text>Loading...</Text>
+           if (error) return <Text>`Error! ${error.message}`</Text>
+           return (
+             <Root>
+               <ScrollView
+                 refreshControl={
+                   <RefreshControl
+                     refreshing={this.state.refreshing}
+                     onRefresh={this.testRefresh}
+                     title={'正在加载中'}
+                   />
+                 }
+               >
+                 <Container>
+                   <Content>
+                     <View style={[Styles.contentStyle, Styles.contentBox]}>
+                       {
+                         data.allMatchSchedules.nodes.map((p, i) => {
+                           return <View key={i}>
+                             {
+                               this.state.backFlagTest === true && refetch() && this.setState({ refreshing: false, isRefetch: false, backFlagTest: false })
+                             }
+                             {
+                               this.state.isRefetch === true && refetch() && this.finishedRefresh()
+                             }
+                             {/* 当没有任何进球数据时 */}
+                             {
+                               !p.matchGoalById && <TouchableOpacity style={Styles.matchBox} onPress={() => navigation.navigate('GoalDetailsForm', {
+                                 teamAId: p.footballTeamByTeamA.id,
+                                 teamBId: p.footballTeamByTeamB.id,
+                                 teamAName: p.footballTeamByTeamA.teamName,
+                                 teamBName: p.footballTeamByTeamB.teamName,
+                                 matchId: p.id,
+                                 backFlagTestChanges: this.backFlagTestChanges,
+                                 teamALogo: p.footballTeamByTeamA.imageByTeamLogo.url,
+                                 teamBLogo: p.footballTeamByTeamB.imageByTeamLogo.url
+                               })}>
+                                 {/* 日期场序轮数 */}
+                                 <View style={[Styles.matchBoxTop]}>
+                                   <View style={Styles.rowFlex}>
+                                     <Text>日期：</Text>
+                                     <Text style={Styles.topFont}>{p.matchDate}</Text>
+                                   </View>
+                                   <View style={Styles.rowFlex}>
+                                     <Text>轮数：</Text>
+                                     <Text style={Styles.topFont}>{p.wheelNumber}</Text>
+                                   </View>
+                                   <View style={Styles.rowFlex}>
+                                     <Text>场序:</Text>
+                                     <Text style={Styles.topFont}>{p.orderNumber}</Text>
+                                   </View>
+                                 </View>
+                                 {/* 主客队 */}
+                                 <View style={Styles.matchBoxBottom}>
+                                   <View style={Styles.rowFlex}>
+                                     <Image style={Styles.imgSize} source={{ uri: p.footballTeamByTeamA.imageByTeamLogo.url }}/>
+                                     <Text style={Styles.teamName}>{p.footballTeamByTeamA.teamName}</Text>
+                                   </View>
+                                   <Text>VS</Text>
+                                   <View style={Styles.rowFlex}>
+                                     <Text style={Styles.teamName}>{p.footballTeamByTeamB.teamName}</Text>
+                                     <Image style={Styles.imgSize} source={{ uri: p.footballTeamByTeamB.imageByTeamLogo.url }}/>
+                                   </View>
+                                 </View>
+                               </TouchableOpacity>
+                             }
+                             {/* 存在进球数据，但是没有完成比赛数据录入的 */}
+                             {
+                               p.matchGoalById && p.matchGoalById.finished === false && <TouchableOpacity style={Styles.matchBox} onPress={() => navigation.navigate('GoalDetailsForm', {
+                                 teamAId: p.footballTeamByTeamA.id,
+                                 teamBId: p.footballTeamByTeamB.id,
+                                 teamAName: p.footballTeamByTeamA.teamName,
+                                 teamBName: p.footballTeamByTeamB.teamName,
+                                 matchId: p.id,
+                                 backFlagTestChanges: this.backFlagTestChanges,
+                                 teamALogo: p.footballTeamByTeamA.imageByTeamLogo.url,
+                                 teamBLogo: p.footballTeamByTeamB.imageByTeamLogo.url
+                               })}>
+                                 {/* 日期场序轮数 */}
+                                 <View style={[Styles.matchBoxTop]}>
+                                   <View style={Styles.rowFlex}>
+                                     <Text>日期：</Text>
+                                     <Text style={Styles.topFont}>{p.matchDate}</Text>
+                                   </View>
+                                   <View style={Styles.rowFlex}>
+                                     <Text>轮数：</Text>
+                                     <Text style={Styles.topFont}>{p.wheelNumber}</Text>
+                                   </View>
+                                   <View style={Styles.rowFlex}>
+                                     <Text>场序:</Text>
+                                     <Text style={Styles.topFont}>{p.orderNumber}</Text>
+                                   </View>
+                                 </View>
+                                 {/* 主客队 */}
+                                 <View style={Styles.matchBoxBottom}>
+                                   <View style={Styles.rowFlex}>
+                                     <Image style={Styles.imgSize} source={{ uri: p.footballTeamByTeamA.imageByTeamLogo.url }}/>
+                                     <Text style={Styles.teamName}>{p.footballTeamByTeamA.teamName}</Text>
+                                   </View>
+                                   <Text>VS</Text>
+                                   <View style={Styles.rowFlex}>
+                                     <Text style={Styles.teamName}>{p.footballTeamByTeamB.teamName}</Text>
+                                     <Image style={Styles.imgSize} source={{ uri: p.footballTeamByTeamB.imageByTeamLogo.url }}/>
+                                   </View>
+                                 </View>
+                               </TouchableOpacity>
+                             }
+                           </View>
+                         })
+                       }
+                     </View>
+                   </Content>
+                 </Container>
+               </ScrollView>
+             </Root>
+           )
+         }}
+       </Query>
+     }
 }
