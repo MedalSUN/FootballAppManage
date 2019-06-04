@@ -68,59 +68,53 @@ export default class matchDetailsSelectPage extends React.Component {
     const teamAName = navigation.getParam('teamAName', '')
     const teamBName = navigation.getParam('teamBName', '')
     const teamId = navigation.getParam('teamId', '')
-    console.log(teamId)
     return (
       <View>
         {
-          this.state.selectContent === 'team' && <View style={Styles.contentStyle}><Query query={ALL_FOOTBALL_TEAM} variables={ { condition: { teamName: teamAName } }}>
-            {({ data, error, loading }) => {
-              if (loading) return <Text>Loading...</Text>
-              if (error) return <Text>`Error! ${error.message}`</Text>
-              console.log(data)
-              return (
-                <View>
-                  {
-                    data.allFootballTeams.nodes.map((p, i) => {
-                      return <View key={i} style={[Styles.teamBox, Styles.rowFlex]}>
-                        <Image style={Styles.teamLogoSize} source={ { uri: p.imageByTeamLogo.url }}/>
-                        <TouchableOpacity onPress={() => this.getTeamItem(p.teamName, p.id)}>
-                          <Text style={Styles.teamName}>{p.teamName}</Text>
-                        </TouchableOpacity>
-                      </View>
-                    })
-                  }
-                </View>
-              )
-            }}
-          </Query>
-          <Query query={ALL_FOOTBALL_TEAM} variables={ { condition: { teamName: teamBName } }}>
-            {({ data, error, loading }) => {
-              if (loading) return <Text>Loading...</Text>
-              if (error) return <Text>`Error! ${error.message}`</Text>
-              console.log(data)
-              return (
-                <View>
-                  {
-                    data.allFootballTeams.nodes.map((p, i) => {
-                      return <View key={i} style={[Styles.teamBox, Styles.rowFlex]}>
-                        <Image style={Styles.teamLogoSize} source={ { uri: p.imageByTeamLogo.url }}/>
-                        <TouchableOpacity onPress={() => this.getTeamItem(p.teamName, p.id)}>
-                          <Text style={Styles.teamName}>{p.teamName}</Text>
-                        </TouchableOpacity>
-                      </View>
-                    })
-                  }
-                </View>
-              )
-            }}
-          </Query>
+          this.state.selectContent === 'team' && <View style={Styles.contentStyle}>
+            <Query query={ALL_FOOTBALL_TEAM}
+              variables={ { condition: { teamName: teamAName } }}>
+              {({ data, error, loading }) => {
+                if (loading) return <Text>Loading...</Text>
+                if (error) return <Text>`Error! ${error.message}`</Text>
+                return (
+                  <View>
+                    {
+                      data.allFootballTeams.nodes.map((p, i) => {
+                        return <View key={i} style={[Styles.teamBox, Styles.rowFlex]}>
+                          <Image style={Styles.teamLogoSize} source={ { uri: p.imageByTeamLogo.url }}/>
+                          <TouchableOpacity onPress={() => this.getTeamItem(p.teamName, p.id)}>
+                            <Text style={Styles.teamName}>{p.teamName}</Text>
+                          </TouchableOpacity>
+                        </View>
+                      })
+                    }
+                  </View>
+                )
+              }}
+            </Query>
+            <Query query={ALL_FOOTBALL_TEAM} variables={ { condition: { teamName: teamBName } }}>
+              {({ data, error, loading }) => {
+                if (loading) return <Text>Loading...</Text>
+                if (error) return <Text>`Error! ${error.message}`</Text>
+                return (
+                  <View>
+                    {
+                      data.allFootballTeams.nodes.map((p, i) => {
+                        return <View key={i} style={[Styles.teamBox, Styles.rowFlex]}>
+                          <Image style={Styles.teamLogoSize} source={ { uri: p.imageByTeamLogo.url }}/>
+                          <TouchableOpacity onPress={() => this.getTeamItem(p.teamName, p.id)}>
+                            <Text style={Styles.teamName}>{p.teamName}</Text>
+                          </TouchableOpacity>
+                        </View>
+                      })
+                    }
+                  </View>
+                )
+              }}
+            </Query>
           </View>
         }
-        {/* {
-          !teamId && <View>
-            <Text>请先选择球队再选择球员</Text>
-          </View>
-        } */}
         {
           this.state.selectContent === 'player' && <Query query={ALL_TEAM_PLAYER} variables={{ condition: { teamId: teamId, checked: true } }}>
             {({ data, error, loading }) => {
@@ -131,15 +125,16 @@ export default class matchDetailsSelectPage extends React.Component {
                 <View style={Styles.contentStyle}>
                   {/* 球队成员 */}
                   <View>
-                    <View style={Styles.timeEventBox}>
-                      <Text style={Styles.otherText}>球队成员</Text>
+                    <View style={Styles.selectPlayerTextBox}>
+                      <Text style={Styles.selectText}>球队成员</Text>
                     </View>
                     {/* 展示球队的所有球员 */}
                     <View style={Styles.allPlayerContainer}>
                       {
                         data.allPersonTeams.nodes.map((p, i) => {
                           return (
-                            <TouchableOpacity onPress={ () => { this.getPlayerItem(p.personByPersonId.playerName, p.personByPersonId.id) }} key={i} style={[Styles.timeEventBox, Styles.marginTop15]}>
+                            <TouchableOpacity onPress={ () => { this.getPlayerItem(p.personByPersonId.playerName, p.personByPersonId.id) }}
+                              key={i} style={[Styles.playerBox, Styles.marginTop15]}>
                               <Image style={Styles.playerHeaderImg} source={{ uri: p.personByPersonId.imageByPlayerImg.url }}/>
                               <Text style={Styles.playerNameText}>{p.personByPersonId.playerName}</Text>
                             </TouchableOpacity>
