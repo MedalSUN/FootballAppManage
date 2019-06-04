@@ -35,39 +35,39 @@ export default class GoalDetailsForm extends React.Component {
       }
     }
 
-    componentDidMount () {
-      this.getMatchScore()
-    }
+    // componentDidMount () {
+    //   this.getMatchScore()
+    // }
 
-    // 创建函数：用于获取当前比分
-    getMatchScore = () => {
-      const { navigation } = this.props
-      const matchId = navigation.getParam('matchId', '')
-      console.log(matchId)
-      client.query({
-        query: MATCH_GOAL,
-        variables: {
-          'condition': {
-            'id': matchId
-          }
-        }
-      }).then((reponse) => {
-        console.log(reponse)
-        let res = reponse.data.allMatchGoals
-        console.log(res.nodes)
-        if (res.nodes) {
-          this.setState({
-            teamAGoals: res.nodes.goalA,
-            teamBGoals: res.nodes.goalB
-          })
-        } else {
-          this.setState({
-            teamAGoals: 0,
-            teamBGoals: 0
-          })
-        }
-      })
-    }
+    // // 创建函数：用于获取当前比分 当更新每一个进球后，就将比分进行更新
+    // getMatchScore = () => {
+    //   const { navigation } = this.props
+    //   const matchId = navigation.getParam('matchId', '')
+    //   console.log(matchId)
+    //   client.query({
+    //     query: MATCH_GOAL,
+    //     variables: {
+    //       'condition': {
+    //         'id': matchId
+    //       }
+    //     }
+    //   }).then((reponse) => {
+    //     console.log(reponse)
+    //     let res = reponse.data.allMatchGoals
+    //     console.log(res.nodes)
+    //     if (res.nodes) {
+    //       this.setState({
+    //         teamAGoals: res.nodes.goalA,
+    //         teamBGoals: res.nodes.goalB
+    //       })
+    //     } else {
+    //       this.setState({
+    //         teamAGoals: 0,
+    //         teamBGoals: 0
+    //       })
+    //     }
+    //   })
+    // }
 
     // 输入框变化时，调用方法
     handleInputChange = (field, value) => {
@@ -121,10 +121,16 @@ export default class GoalDetailsForm extends React.Component {
   changeFinished = () => {
     const { navigation } = this.props
     const matchId = navigation.getParam('matchId', '')
+    const teamAId = navigation.getParam('teamAId', '')
+    const teamBId = navigation.getParam('teamBId', '')
+    console.log(teamAId)
+    console.log(teamBId)
     client.mutate({
       mutation: FINISHED_MATCH_GOAL,
       variables: {
         'input': {
+          '_teamAId': teamAId,
+          '_teamBId': teamBId,
           '_matchId': matchId
         }
       }
@@ -181,7 +187,7 @@ export default class GoalDetailsForm extends React.Component {
             </View>
           </View>
           {/* 显示当前比分 */}
-          <View style={Styles.rowFlex}>
+          {/* <View style={Styles.rowFlex}>
             <View style={Styles.rowFlex}>
               <Text style={Styles.teamName}>{this.state.teamAGoals}</Text>
             </View>
@@ -189,7 +195,7 @@ export default class GoalDetailsForm extends React.Component {
             <View style={Styles.rowFlex}>
               <Text style={Styles.teamName}>{this.state.teamBGoals}</Text>
             </View>
-          </View>
+          </View> */}
 
           <Form style={Styles.loginForm}>
             <View style={[Styles.rowStyle1, Styles.teamSelectBox]}>
