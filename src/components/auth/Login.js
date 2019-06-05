@@ -42,9 +42,9 @@ class Login extends React.Component {
   handleSubmit = () => {
     console.log('in handle submit')
     this.setState({ ...this.state, token: 'in handle submit' })
-    // const { email, password } = this.state
-    const accountNumber = '17616023616'
-    const password = '123'
+    const { accountNumber, password } = this.state
+    // const accountNumber = '17616023616'
+    // const password = '123'
     // if (accountNumber.length === 0) {
     //   return this.setState({ emailError: true })
     // }
