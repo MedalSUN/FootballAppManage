@@ -17,7 +17,7 @@ export default class PlayerItem extends React.Component {
   // Toast 提示信息
   showToast = (message) => {
     let type = ''
-    if (message === '比分增加成功') {
+    if (message === '审批通过成功') {
       type = 'success'
     } else {
       type = 'warning'
@@ -45,6 +45,7 @@ export default class PlayerItem extends React.Component {
       }
     }).then((reponse) => {
       console.log(reponse)
+      this.showToast(reponse.data.approval.string)
     })
   }
 
